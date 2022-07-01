@@ -1,0 +1,63 @@
+package floatOperation;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
+import java.util.UUID;
+
+public class floatOperation implements RequestHandler<Map<String, String>, Response> {
+    private static final String CONTAINER_ID = UUID.randomUUID().toString();
+    private static boolean cold = true;
+    @Override
+    public Response handleRequest(Map<String, String> parameters, Context context) {
+        String nString = parameters.getOrDefault("n", "");
+       int n = Integer.parseInt(nString);
+        long result = floatOper(n);
+        return createSuccessResponse(String.valueOf(result), context.getAwsRequestId());
+    }
+
+    public long floatOper(int n){
+
+        long start= System.nanoTime();
+        for(int i = 0; i<=n ; i++){
+            Math.sin(i);
+            Math.cos(i);
+            Math.sqrt(i);
+        }
+        return System.nanoTime()-start;
+    }
+
+
+
+    public Response createErrorResponse(String message, String requestId) {
+        Response response = new Response(changeColdWarm(),"[400] " + message, requestId, CONTAINER_ID);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String responseJSON = mapper.writeValueAsString(response);
+            throw new LambdaException(responseJSON);
+        } catch (JsonProcessingException e) {
+            throw new LambdaException("{ \"result\": \"[400] Error while creating JSON response.\" }");
+        }
+    }
+
+    private boolean changeColdWarm() {
+        boolean coldWarm = this.cold;
+        this.cold = false;
+        return coldWarm;
+    }
+
+    public Response createSuccessResponse(String message, String requestId) {
+        Response response = new Response(changeColdWarm(), message, requestId, CONTAINER_ID);
+        response.addCPUAndVMInfo();
+        return response;
+    }
+
+    public boolean isNumeric(String value) {
+        return value.matches("\\d+");
+    }
+}
+

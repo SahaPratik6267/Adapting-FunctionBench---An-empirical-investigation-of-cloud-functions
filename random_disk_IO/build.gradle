@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+
+
+}
+java {
+
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+jar {
+    manifest {
+        attributes('Class-Path' : '/src/main/resources/libopencv_java455.so' )
+    }
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+
+
+}
+
+dependencies {
+
+
+
+
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.152'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+    implementation 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
+    implementation 'com.amazonaws:aws-lambda-java-runtime-interface-client:2.1.0'
+    implementation 'com.amazonaws:aws-lambda-java-tests:1.1.1'
+    implementation files("C:/Users/joy/Downloads/Documents/opencv-455.jar")
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task buildZip(type: Zip) {
+    // Using the Zip API from gradle to build a zip file of all the dependencies
+    //
+    // The path to this zip file can be set in the serverless.yml file for the
+    // package/artifact setting for deployment to the S3 bucket
+    //
+    // Link: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Zip.html
+
+    // set the base name of the zip file
+    baseName = "Random_disk_IO_java"
+
+
+
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.compileClasspath
+    }
+}
+
+build.dependsOn buildZip
+
+
+

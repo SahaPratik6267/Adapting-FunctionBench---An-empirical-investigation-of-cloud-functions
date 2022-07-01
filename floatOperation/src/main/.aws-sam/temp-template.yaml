@@ -1,0 +1,11 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 768
+      Handler: floatOperation.floatOperation
+      CodeUri: C:\Users\joy\IdeaProjects\jvfunctionbench\floatOperation
+      Runtime: java11
+      Architectures:
+        - x86_64

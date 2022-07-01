@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../Gradle" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ImageProcessing" />
+            <option value="$PROJECT_DIR$/JavaFunction.java" />
+            <option value="$PROJECT_DIR$/VideoProcessing" />
+            <option value="$PROJECT_DIR$/floatOperation" />
+            <option value="$PROJECT_DIR$/gzipCompress" />
+            <option value="$PROJECT_DIR$/gzipCompression" />
+            <option value="$PROJECT_DIR$/json_dumps_loads" />
+            <option value="$PROJECT_DIR$/matmul" />
+            <option value="$PROJECT_DIR$/random_disk_IO" />
+            <option value="$PROJECT_DIR$/s3DownloadUpload" />
+            <option value="$PROJECT_DIR$/sequentialDiskIO" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

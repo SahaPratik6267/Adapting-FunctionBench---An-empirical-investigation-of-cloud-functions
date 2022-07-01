@@ -1,0 +1,11 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 94
+      MemorySize: 768
+      Handler: jsonDumpLoad.jsonDumpLoad
+      CodeUri: C:\Users\joy\IdeaProjects\jvfunctionbench\json_dumps_loads
+      Runtime: java11
+      Architectures:
+        - x86_64

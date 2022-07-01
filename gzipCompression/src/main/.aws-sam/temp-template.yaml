@@ -1,0 +1,11 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 82
+      MemorySize: 832
+      Handler: gZipCompression.gZipCompression
+      CodeUri: C:\Users\joy\IdeaProjects\jvfunctionbench\gzipCompression
+      Runtime: java11
+      Architectures:
+        - x86_64
